@@ -1,0 +1,42 @@
+body {
+    font-family: Arial;
+    font-size: 12pt;
+    margin: 2em;
+    background-color: #efefff;
+}
+h1 {
+    font-weight: normal;
+    font-size: 20pt;
+}
+input[type=submit] {
+    border: 2px outset #343;
+    font-size: 12pt;
+    padding: 0.2em 2em;
+    margin: 1em;
+    background-color: #ffc;
+}
+select {
+    font-size: 12pt;
+    padding: 0.2em 2em;
+}
+
+/* Table in edit page */
+.edit input[type=text] {
+    width: 800px;
+    border: 1px solid #666;
+    padding: 0.2em;
+    font-size: 12pt;
+}
+.edit td {
+    padding: 0.1em 1em;
+    border: 1px solid #333;
+    background-color: #fff;
+}
+.edit tr.key td {
+    padding: 0.3em 0 0.2em 8em;
+    font-weight: bold;
+    background-color: #ccf;
+}
+.edit {
+    border-collapse: collapse;
+}
