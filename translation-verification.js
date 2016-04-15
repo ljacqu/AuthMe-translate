@@ -1,10 +1,13 @@
 $(document).ready(function() {
-    if ($('table.edit').length === 0) {
-        return;
+    if ($('table.edit').length > 0) {
+        $.each($('table.edit input[type="text"]'), function () {
+            checkField($(this));
+        });
+    } else if ($('table.public').length > 0) {
+        $.each($('table.public tr td:nth-child(2)'), function () {
+            checkCell($(this));
+        })
     }
-    $.each($('table.edit input[type="text"]'), function () {
-        checkField($(this));
-    });
 });
 
 
@@ -30,6 +33,21 @@ function checkField(elem) {
         if (missingTags.length > 0) {
             elem.addClass('missing');
             elem.next('span.error').html('<br />Missing tags ' + missingTags.join(', '));
+        }
+    }
+}
+
+function checkCell(elem) {
+    var elemText = elem.text().trim();
+    var tags;
+    if (elemText === '') {
+        elem.addClass('empty');
+    } else if ((tags = getTagsOrFalse(elem)) !== false) {
+        for (var i = 0; i < tags.length; ++i) {
+            if (elemText.indexOf(tags[i]) === -1) {
+                elem.addClass('missing');
+                return;
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ define('PUBLIC_KEY_LENGTH',  9);
 header('Content-Type: text/html; charset=utf-8');
 require './controller/CreateCopyCtrl.php';
 require './controller/EditPageCtrl.php';
+require './controller/PublicPageCtrl.php';
 require './controller/SaveTranslationCtrl.php';
 require './controller/Template.php';
 
@@ -56,7 +57,7 @@ if (!isset($_GET['p']) && !empty($_SERVER['QUERY_STRING'])) {
 
 <?php
 if ($action === 'public') {
-  require './controller/public_page_ctrl.php';
+  (new PublicPageCtrl())->run($_GET['p']);
 } else if ($action === 'edit') {
   (new EditPageCtrl())->run($secret_id);
 } else {

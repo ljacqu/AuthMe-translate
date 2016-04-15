@@ -68,10 +68,25 @@ div.error {
     border-collapse: collapse;
 }
 
+/* Table for public, read-only page */
+.public {
+    border-collapse: collapse;
+}
+.public td, .public th {
+    border: 1px solid #000;
+    padding: 0.2em;
+}
+.public tr:nth-child(even) {
+    background-color: #fff;
+}
+.public tr:nth-child(odd) {
+    background-color: #ddf;
+}
+
 /* CSS marker classes */
-input.empty {
+.empty {
     background-color: #ffc;
 }
-input.missing {
+.missing {
     background-color: #fcc;
 }
