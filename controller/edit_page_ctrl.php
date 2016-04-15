@@ -12,6 +12,10 @@ require USER_DATA_DIRECTORY . $code . '.php';
 
 ?>
 <h1>Edit Language</h1>
+<p>
+  <a onclick="hideValidFields()" id="hideValidFieldsLink">Show only fields with errors</a>
+  <a onclick="showAllFields()" id="showAllFieldsLink" style="display: none">Show all fields</a>
+</p>
 
 <form method="post">
   <table class="edit">
@@ -31,7 +35,9 @@ foreach ($data['messages'] as $entry) {
     <td><input type="text"
                value="{$entry['translatedMessage']}"
                name="{$entry['key']}"
-               onchange="checkTags('{$entry['tags']}')" />
+               data-tags="{$entry['tags']}"
+               onkeyup="checkField(this)" />
+        <span class="error"></span>
     </td>
   </tr>
 HTML;

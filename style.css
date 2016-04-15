@@ -13,18 +13,34 @@ input[type=submit] {
     font-size: 12pt;
     padding: 0.2em 2em;
     margin: 1em;
-    background-color: #ffc;
+    background-color: #fffff9;
+}
+input[type=submit]:hover {
+    cursor: pointer;
+    background-color: #ff9;
+}
+input[type=submit]:active {
+    border-style: inset;
+    background-color: #ff9;
 }
 select {
     font-size: 12pt;
     padding: 0.2em 2em;
+}
+a {
+    color: #33c;
+    text-decoration: underline;
+}
+a:hover {
+    cursor: pointer;
+    color: #007;
 }
 
 /* Table in edit page */
 .edit input[type=text] {
     width: 800px;
     border: 1px solid #666;
-    padding: 0.2em;
+    /*padding: 0.2em;*/
     font-size: 12pt;
 }
 .edit td {
@@ -39,4 +55,12 @@ select {
 }
 .edit {
     border-collapse: collapse;
+}
+
+/* CSS marker classes */
+input.empty {
+    background-color: #ffc;
+}
+input.missing {
+    background-color: #fcc;
 }

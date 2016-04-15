@@ -39,6 +39,8 @@ if (!isset($_GET['p']) && !empty($_SERVER['QUERY_STRING'])) {
   <meta charset="utf-8" />
   <title>AuthMe Translation</title>
   <link rel="stylesheet" type="text/css" href="style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
+  <script src="translation-verification.js" type="text/javascript"></script>
 </head>
 <body>
 
