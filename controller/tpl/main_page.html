@@ -1,0 +1,20 @@
+<h1>AuthMe Translation</h1>
+<p>
+  This page allows you to edit and export translations of
+  <a href="https://github.com/AuthMe-Team/AuthMeReloaded">AuthMe</a> messages.
+</p>
+
+<p><label for="create">Please select the language you want to work on:</label></p>
+<form method="post">
+  <select name="create" id="create">
+    [#codes]
+      <option value="{code}">Language: {code}</option>
+    [/#codes]
+  </select>
+  <input type="submit" value="Work on translation" />
+</form>
+
+This will create a personal copy of the translation file that you can edit. Once you're satisfied
+with the result, you can create an issue on the
+<a href="https://github.com/Xephi/AuthMeReloaded/issues">AuthMe issue tracker</a> and we will merge the changes
+into the codebase.

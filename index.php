@@ -8,6 +8,7 @@ define('PUBLIC_KEY_LENGTH',  9);
 header('Content-Type: text/html; charset=utf-8');
 require './controller/CreateCopyCtrl.php';
 require './controller/EditPageCtrl.php';
+require './controller/MainPageCtrl.php';
 require './controller/PublicPageCtrl.php';
 require './controller/SaveTranslationCtrl.php';
 require './controller/Template.php';
@@ -42,6 +43,9 @@ if (!isset($_GET['p']) && !empty($_SERVER['QUERY_STRING'])) {
   }
 } else if (isset($_GET['p'])) {
   $action = 'public';
+  if (isset($_GET['json'])) {
+    (new PublicPageCtrl())->run($_GET['p'], true);
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -57,11 +61,11 @@ if (!isset($_GET['p']) && !empty($_SERVER['QUERY_STRING'])) {
 
 <?php
 if ($action === 'public') {
-  (new PublicPageCtrl())->run($_GET['p']);
+  (new PublicPageCtrl())->run($_GET['p'], false);
 } else if ($action === 'edit') {
   (new EditPageCtrl())->run($secret_id);
 } else {
-  require './controller/main_page_ctrl.php';
+  (new MainPageCtrl())->run();
 }
 ?>
 
