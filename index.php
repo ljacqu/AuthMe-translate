@@ -6,24 +6,34 @@ define('SECRET_KEY_LENGTH', 20);
 define('PUBLIC_KEY_LENGTH',  9);
 
 header('Content-Type: text/html; charset=utf-8');
+require './controller/CreateCopyCtrl.php';
+require './controller/EditPageCtrl.php';
+require './controller/SaveTranslationCtrl.php';
+require './controller/Template.php';
+
+
+$secret_id = false;
 if (isset($_POST['create'])) {
 try {
-    require './controller/CreateCopyCtrl.php';
     $ctrl = new CreateCopyCtrl();
     $result = $ctrl->run($_POST['create']);
     header('Location:index.php?' . $result);
     exit;
   } catch (Exception $e) {
-    echo '<h1>Error</h1>';
-    echo $e->getMessage();
+    echo '<h1>Error</h1><div class="error">' . $e->getMessage() . '</div>';
+  }
+} else if (isset($_POST['update_file'])) {
+  try {
+    $secret_id = (new SaveTranslationCtrl())->run();
+
+  } catch (Exception $e) {
+    die ('<h1>Error</h1><div class="error">' . $e->getMessage() . '</div>');
   }
 }
 
 $action = '';
 if (!isset($_GET['p']) && !empty($_SERVER['QUERY_STRING'])) {
-  $potential_code = $_SERVER['QUERY_STRING'];
-  if (preg_match('~^\\w{' . SECRET_KEY_LENGTH . '}+$~', $potential_code)
-    && file_exists(USER_DATA_DIRECTORY . $potential_code . '.php')) {
+  if (EditPageCtrl::validateSecretCode($_SERVER['QUERY_STRING'])) {
     $action = 'edit';
   } else {
     header('Location:index.php');
@@ -48,10 +58,11 @@ if (!isset($_GET['p']) && !empty($_SERVER['QUERY_STRING'])) {
 if ($action === 'public') {
   require './controller/public_page_ctrl.php';
 } else if ($action === 'edit') {
-  require './controller/edit_page_ctrl.php';
+  (new EditPageCtrl())->run($secret_id);
 } else {
   require './controller/main_page_ctrl.php';
 }
 ?>
+
 </body>
 </html>

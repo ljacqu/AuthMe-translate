@@ -1,0 +1,45 @@
+<h1>Edit Language</h1>
+[performed_save]
+  <div class="success">
+    Saved successfully!
+  </div>
+[/performed_save]
+<p>
+  This is your personal copy of the translation. You can edit it anytime you want with the following link:
+  <a href="index.php?{secret_code}">index.php?{secret_code}</a>. Bookmark the link to continue editing later on.
+  <br />Share your translation with the following public link:
+  <a href="index.php?p={public_code}">index.php?p={public_code}</a>.
+  Use the public link to show other people and keep the secret link to yourself so only you can edit.
+</p>
+<p>
+  <a onclick="hideValidFields()" id="hideValidFieldsLink">Show only fields with errors</a>
+  <a onclick="showAllFields()" id="showAllFieldsLink" style="display: none">Show all fields</a>
+</p>
+
+<form method="post">
+  <table class="edit">
+    <tr>
+      <th style="width: 200px">Default (en)</th>
+      <th>Translated</th>
+    </tr>
+  [#messages]
+    <tr class="key"><td colspan="2">{key}</td></tr>
+      <tr>
+        <td>{defaultMessage}</td>
+        <td><input type="text"
+                   value="{translatedMessage}"
+                   name="{key}"
+                   data-tags="{tags}"
+                   onkeyup="checkField(this)" />
+          <span class="error"></span>
+        </td>
+      </tr>
+  [/#messages]
+    <tr>
+      <td colspan="2">
+        <input type="submit" value=" Save " name="update_file" />
+      </td>
+    </tr>
+  </table>
+  <input type="hidden" name="secret_code" value="{secret_code}" />
+</form>

@@ -35,12 +35,23 @@ a:hover {
     cursor: pointer;
     color: #007;
 }
+div.success {
+    border: 1px solid #6c6;
+    padding: 1em;
+    background-color: #efe;
+    display: table-cell;
+}
+div.error {
+    border: 1px solid #c66;
+    padding: 1em;
+    background-color: #fee;
+    display: table-cell;
+}
 
 /* Table in edit page */
 .edit input[type=text] {
     width: 800px;
     border: 1px solid #666;
-    /*padding: 0.2em;*/
     font-size: 12pt;
 }
 .edit td {
