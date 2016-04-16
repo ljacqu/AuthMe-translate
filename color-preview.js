@@ -32,6 +32,8 @@ function toggleColorables() {
 }
 
 function replaceColors(text) {
+    // Can't do & -> &amp; because we're about to replace things like &3
+    text = text.replace(/</g, '&lt;');
     var origLength = text.length;
     for (var code in colorToHex) {
         if (colorToHex.hasOwnProperty(code)) {

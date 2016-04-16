@@ -14,6 +14,8 @@ class EditPageCtrl {
 
     $tags = [
       'performed_save' => ($id !== false),
+      'root' => REMOTE_ROOT,
+      'root_url_encoded' => urlencode(REMOTE_ROOT),
       'secret_code' => $code,
       'public_code' => $data['meta']['publicKey'],
       'language_code' => $data['code'],
