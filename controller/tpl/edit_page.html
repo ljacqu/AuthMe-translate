@@ -22,19 +22,23 @@
       <th style="width: 200px">Default (en)</th>
       <th>Translated</th>
     </tr>
-  [#messages]
-    <tr class="key"><td colspan="2">{key}</td></tr>
+    [#messages]
+      <tr class="key"><td colspan="2">{key}</td></tr>
       <tr>
-        <td>{defaultMessage}</td>
-        <td><input type="text"
-                   value="{translatedMessage}"
-                   name="{key}"
-                   data-tags="{tags}"
-                   onkeyup="checkField(this)" />
+        <td class="language_template"
+            data-key="{key}">
+          <span>{defaultMessage}</span>
+        </td>
+        <td>
+          <input type="text"
+                 value="{translatedMessage}"
+                 name="{key}"
+                 data-tags="{tags}"
+                 onkeyup="checkField(this)" />
           <span class="error"></span>
         </td>
       </tr>
-  [/#messages]
+    [/#messages]
     <tr>
       <td colspan="2">
         <input type="submit" value=" Save " name="update_file" />
@@ -43,3 +47,5 @@
   </table>
   <input type="hidden" name="secret_code" value="{secret_code}" />
 </form>
+
+<div id="language_selector"><!-- Populated via javascript --></div>
