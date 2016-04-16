@@ -8,18 +8,18 @@ h1 {
     font-weight: normal;
     font-size: 20pt;
 }
-input[type=submit] {
+button, input[type=submit] {
     border: 2px outset #343;
     font-size: 12pt;
     padding: 0.2em 2em;
     margin: 1em;
     background-color: #fffff9;
 }
-input[type=submit]:hover {
+button:hover, input[type=submit]:hover {
     cursor: pointer;
     background-color: #ff9;
 }
-input[type=submit]:active {
+button:active, input[type=submit]:active {
     border-style: inset;
     background-color: #ff9;
 }

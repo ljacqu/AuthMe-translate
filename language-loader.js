@@ -28,7 +28,7 @@ $(document).ready(function () {
 });
 
 function populate_language_selector(codes) {
-    var text = 'Compare with another language: ' +
+    var text = 'Messages on left from language: ' +
             '<select name="lang">';
     for (var i = 0; i < codes.length; ++i) {
         var tagEnd = codes[i] === 'en' ? ' selected="selected">' : '>';

@@ -31,17 +31,19 @@ try {
 }
 
 $action = '';
-if (!isset($_GET['p']) && !empty($_SERVER['QUERY_STRING'])) {
+if (isset($_GET['p'])) {
+  $action = 'public';
+  if (isset($_GET['json'])) {
+    (new PublicPageCtrl())->run($_GET['p'], true);
+  }
+} else if (isset($_GET['l'])) {
+  $action = 'public';
+} else if (!empty($_SERVER['QUERY_STRING'])) {
   if (EditPageCtrl::validateSecretCode($_SERVER['QUERY_STRING'])) {
     $action = 'edit';
   } else {
     header('Location:index.php');
     exit;
-  }
-} else if (isset($_GET['p'])) {
-  $action = 'public';
-  if (isset($_GET['json'])) {
-    (new PublicPageCtrl())->run($_GET['p'], true);
   }
 }
 ?>
@@ -54,16 +56,28 @@ if (!isset($_GET['p']) && !empty($_SERVER['QUERY_STRING'])) {
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
   <script src="translation-verification.js" type="text/javascript"></script>
   <script src="language-loader.js" type="text/javascript"></script>
+  <script src="color-preview.js" type="text/javascript"></script>
 </head>
 <body>
 
 <?php
-if ($action === 'public') {
-  (new PublicPageCtrl())->run($_GET['p'], false);
-} else if ($action === 'edit') {
-  (new EditPageCtrl())->run($secret_id);
-} else {
-  (new MainPageCtrl())->run();
+try {
+  if ($action === 'public') {
+    $ctrl = new PublicPageCtrl();
+    if (isset($_GET['l'])) {
+      $ctrl->showLanguage($_GET['l']);
+    } else {
+      $ctrl->run($_GET['p'], false);
+    }
+  } else if ($action === 'edit') {
+    (new EditPageCtrl())->run($secret_id);
+  } else {
+    (new MainPageCtrl())->run();
+  }
+} catch (Exception $e) {
+  echo '<div class="error">
+    <b>Error: </b>' . $e->getMessage() . '
+    <br /><a href="index.php">Main page</a></div>';
 }
 ?>
 

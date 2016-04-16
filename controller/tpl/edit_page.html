@@ -27,7 +27,7 @@
       <tr>
         <td class="language_template"
             data-key="{key}">
-          <span>{defaultMessage}</span>
+          <span class="colorable">{defaultMessage}</span>
         </td>
         <td>
           <input type="text"
@@ -40,12 +40,17 @@
       </tr>
     [/#messages]
     <tr>
-      <td colspan="2">
+      <td>
         <input type="submit" value=" Save " name="update_file" />
+      </td>
+      <td><span  id="language_selector">
+        <!-- Populated via javascript --></span>
+        <button type="button" onclick="toggleColorables()">
+          Toggle colors
+        </button>
       </td>
     </tr>
   </table>
   <input type="hidden" name="secret_code" value="{secret_code}" />
 </form>
 
-<div id="language_selector"><!-- Populated via javascript --></div>

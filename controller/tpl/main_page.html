@@ -4,14 +4,17 @@
   <a href="https://github.com/AuthMe-Team/AuthMeReloaded">AuthMe</a> messages.
 </p>
 
-<p><label for="create">Please select the language you want to work on:</label></p>
+<p><label for="create">Please select the language you want to view or change:</label></p>
 <form method="post">
   <select name="create" id="create">
     [#codes]
       <option value="{code}">Language: {code}</option>
     [/#codes]
   </select>
-  <input type="submit" value="Work on translation" />
+  <button type="button" onclick="window.location.href = 'index.php?l=' + $('#create').val()">
+    View
+  </button>
+  <input type="submit" value="Edit translation" />
 </form>
 
 This will create a personal copy of the translation file that you can edit. Once you're satisfied

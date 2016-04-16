@@ -1,4 +1,19 @@
 <h1>Translation for Language {language_code}</h1>
+<a href="index.php">Back to main page</a>
+[is_default]
+  <!-- If we show the "improve" button, put both buttons inside the form so they are on the same line -->
+  <form method="post">
+[/is_default]
+
+<button type="button" onclick="toggleColorables()">
+  Toggle colors
+</button>
+
+[is_default]
+  <input type="hidden" name="create" value="{language_code}" />
+  <input type="submit" value="Improve translation" />
+</form>
+[/is_default]
 
 <table class="public">
   <tr>
@@ -8,9 +23,13 @@
   [#messages]
     <tr>
       <td>{key}</td>
-      <td data-tags="{tags}">{translatedMessage}</td>
+      <td data-tags="{tags}" class="colorable">{translatedMessage}</td>
     </tr>
   [/#messages]
 </table>
 
-Last modified: {modified}
+[is_translation]
+  <p style="margin-top: 2em">
+    Created: {created}; last modified: {modified}
+  </p>
+[/is_translation]
