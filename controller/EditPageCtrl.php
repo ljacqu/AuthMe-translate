@@ -16,6 +16,7 @@ class EditPageCtrl {
       'performed_save' => ($id !== false),
       'secret_code' => $code,
       'public_code' => $data['meta']['publicKey'],
+      'language_code' => $data['code'],
       'messages' => array_map(function ($message) {
         return array_map('htmlspecialchars', $message);
       }, $data['messages'])
