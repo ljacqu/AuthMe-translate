@@ -1,4 +1,6 @@
 <h1>Edit Language</h1>
+<a href="index.php">Main page</a>
+
 [performed_save]
   <div class="success">
     Saved successfully!
@@ -44,10 +46,10 @@
     [/#messages]
     <tr>
       <td>
-        <input type="submit" value=" Save " name="update_file" />
+        <input type="submit" value="Save" name="update_file" />
       </td>
-      <td><span  id="language_selector">
-        <!-- Populated via javascript --></span>
+      <td>
+        <span id="language_selector"><!-- Populated via javascript --></span>
         <button type="button" onclick="toggleColorables()">
           Toggle colors
         </button>
@@ -57,3 +59,12 @@
   <input type="hidden" name="secret_code" value="{secret_code}" />
 </form>
 
+<form method="post">
+  <p style="margin-top: 3em; font-size: 0.8em">
+    To delete this copy, enter the language code (e.g. "en")
+    <input type="hidden" name="secret_code" value="{secret_code}" />
+    <input type="text" name="lang_code" style="width: 50px; font-size: 0.8em" />
+    <input type="submit" value="Delete" name="delete" style="font-size: 0.8em"
+           onclick="return window.confirm('Are you sure you want to delete your copy?');"/>
+  </p>
+</form>

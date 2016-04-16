@@ -3,12 +3,24 @@
 
 class MainPageCtrl {
 
+  private $ipRegister;
+
+  function __construct(IpRegister $ipRegister) {
+    $this->ipRegister = $ipRegister;
+  }
+
   function run() {
     $codes = array_map(function ($code) {
       return ['code' => $code];
     }, self::getAvailableLanguages());
 
-    Template::displayTemplate('./controller/tpl/main_page.html', ['codes' => $codes]);
+    $translations = $this->getTranslationsTag();
+    $tags = [
+      'codes' => $codes,
+      'translations' => $translations
+    ];
+
+    Template::displayTemplate('./controller/tpl/main_page.html', $tags);
   }
 
   static function getAvailableLanguages() {
@@ -30,6 +42,13 @@ class MainPageCtrl {
     }
     asort($codes);
     return $codes;
+  }
+
+  private function getTranslationsTag() {
+    $translations = $this->ipRegister->getTranslationOfIp($_SERVER['REMOTE_ADDR']);
+    return array_map(function ($secretKey, $langCode) {
+      return ['secret_key' => $secretKey, 'language_code' => $langCode];
+    }, $translations, array_keys($translations));
   }
 
   private static function isMessagesFile($file) {

@@ -2,13 +2,22 @@
 
 class CreateCopyCtrl {
 
-  function run($langIndexInput) {
-    $code = $this->getLanguageInputOrFail($langIndexInput);
+  private $ipRegister;
 
+  function __construct(IpRegister $ipRegister) {
+    $this->ipRegister = $ipRegister;
+  }
+
+  function run($languageCode) {
+    $this->validateLanguageCode($languageCode);
+    if ($this->ipRegister->doesIpHaveTranslation($_SERVER['REMOTE_ADDR'], $languageCode)) {
+      throw new Exception('You already have a translation for ' . $languageCode
+        . '. Delete it first to create a new one (link on main page).');
+    }
     $secretKey = $this->randomString(SECRET_KEY_LENGTH);
     $publicKey = $this->randomString(PUBLIC_KEY_LENGTH);
 
-    $this->writeData($code, $publicKey, USER_DATA_DIRECTORY . $secretKey . '.php');
+    $this->writeData($languageCode, $publicKey, USER_DATA_DIRECTORY . $secretKey . '.php');
     $fh = fopen(USER_DATA_DIRECTORY . $publicKey . '.key', 'w');
     if ($fh) {
       fwrite($fh, $secretKey);
@@ -17,6 +26,7 @@ class CreateCopyCtrl {
       throw new Exception('Error writing public key file');
     }
 
+    $this->ipRegister->addTranslation($_SERVER['REMOTE_ADDR'], $languageCode, $secretKey);
     return $secretKey;
   }
 
@@ -40,15 +50,13 @@ class CreateCopyCtrl {
     }
   }
 
-  private function getLanguageInputOrFail($langIndexInput) {
-    if (!is_scalar($langIndexInput) || !preg_match('~^[a-z]{1,4}$~', $langIndexInput)) {
+  private function validateLanguageCode($languageCode) {
+    if (!is_scalar($languageCode) || !preg_match('~^[a-z]{1,4}$~', $languageCode)) {
       throw new Exception('Invalid language ID');
     }
-    $code = $langIndexInput;
-    if (!file_exists(IMPORT_DIRECTORY . 'messages_' . $code . '.json')) {
+    if (!file_exists(IMPORT_DIRECTORY . 'messages_' . $languageCode . '.json')) {
       throw new Exception('The language does not exist');
     }
-    return $code;
   }
 
   private function randomString($len) {
