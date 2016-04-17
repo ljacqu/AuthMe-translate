@@ -6,13 +6,13 @@ $(document).ready(function() {
     } else if ($('table.public').length > 0) {
         $.each($('table.public tr td:nth-child(2)'), function () {
             checkCell($(this));
-        })
+        });
     }
 });
 
 
 function checkField(elem) {
-    var elem = $(elem);
+    elem = $(elem);
     elem.removeClass('empty');
     elem.removeClass('missing');
     var errorMessage = elem.next('span.error');

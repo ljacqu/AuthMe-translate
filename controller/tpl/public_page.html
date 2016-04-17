@@ -13,7 +13,10 @@
   <input type="hidden" name="create" value="{language_code}" />
   <input type="submit" value="Improve translation" />
 </form>
-[/is_default]
+[/is_default][is_translation]
+  <input type="checkbox" id="show_changes_chk" data-lang="{language_code}" />
+  <label for="show_changes_chk">Show changes</label>
+[/is_translation]
 
 <table class="public">
   <tr>
