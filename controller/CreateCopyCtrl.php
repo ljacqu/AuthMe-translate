@@ -9,7 +9,7 @@ class CreateCopyCtrl {
   }
 
   function run($languageCode) {
-    $this->validateLanguageCode($languageCode);
+    $isExistingCode = $this->validateLanguageCode($languageCode);
     if ($this->ipRegister->doesIpHaveTranslation($_SERVER['REMOTE_ADDR'], $languageCode)) {
       throw new Exception('You already have a translation for ' . $languageCode
         . '. Delete it first to create a new one (link on main page).');
@@ -17,7 +17,8 @@ class CreateCopyCtrl {
     $secretKey = $this->randomString(SECRET_KEY_LENGTH);
     $publicKey = $this->randomString(PUBLIC_KEY_LENGTH);
 
-    $this->writeData($languageCode, $publicKey, USER_DATA_DIRECTORY . $secretKey . '.php');
+    $templateLanguage = $isExistingCode ? $languageCode : 'en';
+    $this->writeData($templateLanguage, $languageCode, $publicKey, USER_DATA_DIRECTORY . $secretKey . '.php');
     $fh = fopen(USER_DATA_DIRECTORY . $publicKey . '.key', 'w');
     if ($fh) {
       fwrite($fh, $secretKey);
@@ -30,16 +31,20 @@ class CreateCopyCtrl {
     return $secretKey;
   }
 
-  private function writeData($langCode, $publicKey, $destinationFile) {
-    $data = (array) json_decode(file_get_contents(IMPORT_DIRECTORY . 'messages_' . $langCode . '.json'));
+  private function writeData($templateLanguage, $newLangCode, $publicKey, $destinationFile) {
+    $data = (array) json_decode(file_get_contents(IMPORT_DIRECTORY . 'messages_' . $templateLanguage . '.json'));
     foreach ($data['messages'] as $key => $obj) {
       $data['messages'][$key] = (array) $obj;
+      if ($templateLanguage !== $newLangCode) {
+        $data['messages'][$key]['translatedMessage'] = '';
+      }
     }
     $data['meta'] = [
       'publicKey' => $publicKey,
       'created' => time(),
       'modified' => time()
     ];
+    $data['code'] = $newLangCode;
 
     $fh = fopen($destinationFile, 'w');
     if ($fh) {
@@ -51,12 +56,10 @@ class CreateCopyCtrl {
   }
 
   private function validateLanguageCode($languageCode) {
-    if (!is_scalar($languageCode) || !preg_match('~^[a-z]{1,4}$~', $languageCode)) {
+    if (!is_scalar($languageCode) || !preg_match('~^[a-z]{2,4}$~', $languageCode)) {
       throw new Exception('Invalid language ID');
     }
-    if (!file_exists(IMPORT_DIRECTORY . 'messages_' . $languageCode . '.json')) {
-      throw new Exception('The language does not exist');
-    }
+    return file_exists(IMPORT_DIRECTORY . 'messages_' . $languageCode . '.json');
   }
 
   private function randomString($len) {

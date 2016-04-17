@@ -26,6 +26,10 @@ button:active, input[type=submit]:active {
 .smallpadding {
     padding: 0.1em;
 }
+.nav {
+    font-size: 0.9em;
+    padding: 0 1em;
+}
 select {
     font-size: 12pt;
     padding: 0.2em 2em;

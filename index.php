@@ -64,10 +64,6 @@ if (isset($_GET['p'])) {
   <meta charset="utf-8" />
   <title>AuthMe Translation</title>
   <link rel="stylesheet" type="text/css" href="style.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
-  <script src="translation-verification.js" type="text/javascript"></script>
-  <script src="language-loader.js" type="text/javascript"></script>
-  <script src="color-preview.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -92,5 +88,10 @@ try {
 }
 ?>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
+  <script src="translation-verification.js" type="text/javascript"></script>
+  <script src="language-loader.js" type="text/javascript"></script>
+  <script src="color-preview.js" type="text/javascript"></script>
+  <script src="create_language.js" type="text/javascript"></script>
 </body>
 </html>

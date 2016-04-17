@@ -1,3 +1,6 @@
+<p class="nav">
+  Main page
+</p>
 <h1>AuthMe Translation</h1>
 <p>
   This page allows you to edit and export translations of
@@ -16,6 +19,16 @@
   </button>
   <input type="submit" value="Edit translation" />
 </form>
+<form method="post">
+  <p id="new_lang">
+    New language: <a id="new_lang_link">click here</a>
+    <input type="text" name="create" style="display: none" />
+    <input type="submit" value="Create" style="display: none" />
+    <span id="new_lang_error" style="display: none">Please use the
+      <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code of a language</span>
+  </p>
+</form>
+
 
 This will create a personal copy of the translation file that you can edit. Once you're satisfied
 with the result, you can create an issue on the
