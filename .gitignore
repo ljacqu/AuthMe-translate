@@ -2,3 +2,5 @@
 /import/*.json
 /userdata/*.key
 /userdata/*.php
+/admin/update_codes.php
+/admin/.htpasswd

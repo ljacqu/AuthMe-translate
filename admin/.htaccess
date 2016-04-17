@@ -1,0 +1,5 @@
+AuthName "AuthMe Translation Admin"
+AuthType Basic
+AuthUserFile C:\wamp\www\AuthMe-translate\admin\.htpasswd
+AuthGroupFile /dev/null
+require valid-user
