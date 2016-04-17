@@ -1,11 +1,15 @@
 <?php
 require 'constants.php';
 
-if (isset($_POST['code']) && isset($_POST['file']) && isset($_POST['language'])) {
-  // Validate input
-  $code = $_POST['code'];
-  if (!is_scalar($code) || !preg_match('~^[0-9A-F]{12}$~', $code)) {
-    die('Invalid update code');
+if (isset($_POST['file']) && isset($_POST['language'])) {
+  // Check access
+  require './admin/allowed_ips.php'; // Contains $allowed_ips
+  $user_ip = $_SERVER['REMOTE_ADDR'];
+  if (!isset($allowed_ips[$user_ip]) || time() > $allowed_ips[$user_ip]) {
+    $input_code = filter_input(INPUT_POST, 'language', FILTER_UNSAFE_RAW,
+      FILTER_REQUIRE_SCALAR | FILTER_FLAG_STRIP_LOW) ?: '';
+    error_log('IP address "' . $_SERVER['REMOTE_ADDR'] . '" tried to update language "' . $input_code . '"');
+    die('Unauthorized IP address');
   }
 
   $file = $_POST['file'];
@@ -16,12 +20,6 @@ if (isset($_POST['code']) && isset($_POST['file']) && isset($_POST['language']))
   $language = $_POST['language'];
   if (!is_scalar($language) || !preg_match('~^[a-z]{1,4}$~', $language)) {
     die('Invalid language code');
-  }
-
-  // Check update code
-  require './admin/update_codes.php'; // Contains $update_codes
-  if (!isset($update_codes[$code]) || time() > $update_codes[$code]) {
-    die('Invalid or expired update code');
   }
 
   // Check that $file is valid JSON

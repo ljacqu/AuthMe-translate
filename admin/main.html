@@ -1,0 +1,40 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>AuthMe Translation - Admin</title>
+  <link rel="stylesheet" type="text/css" href="../style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="ip_access.js"></script>
+</head>
+<body>
+  <a href="../">Back to main page</a>
+  <h2>IP addresses allowed to update</h2>
+  <p>
+    The following IP addresses are allowed to update the JSON files via the <code>exportMessages</code> tool task.
+    Connections by other IP addresses will be blocked.
+  </p>
+  <p>
+    Add new IP: <input type="text" name="ip" id="add_ip_field" />
+    <button type="button" class="smallpadding" id="add_ip_btn">Allow IP</button>
+    <span id="add_ip_response"></span>
+  </p>
+  <ul id="ip_list">
+  [#accesses]
+    [ip]
+      <li data-ip="{ip}">{ip} - expires in {expiration_days} days [<a>remove</a>]</li>
+    [/ip]
+  [/#accesses]
+  </ul>
+
+  <h2>Translations</h2>
+  <ul>
+  [#register]
+    <li><b>{ip}</b><ul>
+    [#translations]
+      <li><a href="../index.php?{key}">Language - {lang}</a></li>
+    [/#translations]
+    </ul></li>
+  [/#register]
+  </ul>
+</body>
+</html>

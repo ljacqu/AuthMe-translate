@@ -1,6 +1,12 @@
+# IDE files
 /.idea
+
+# Data files
+/admin/allowed_ips.php
 /import/*.json
 /userdata/*.key
 /userdata/*.php
-/admin/update_codes.php
+
+# Sensitive data / dependent on environment
+/admin/.htaccess
 /admin/.htpasswd

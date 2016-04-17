@@ -21,15 +21,15 @@ foreach ($ip_register as $ip => $entries) {
   $register[] = $tag_entry;
 }
 
-// Contains $update_codes
-require 'update_codes.php';
+// Contains $allowed_ips
+require 'allowed_ips.php';
 $current_time = time();
-$codes = array_map(function ($expiration, $code) use ($current_time) {
-  $expires_in_minutes = max(round(($expiration - $current_time) / 60, 1), 0.0);
-  if ($expires_in_minutes === 0.0) {
-    return ['code' => false];
+$codes = array_map(function ($expiration, $ip) use ($current_time) {
+  $expiration_in_days = round(($expiration - $current_time) / 3600, 1);
+  if ($expiration_in_days <= 0.0) {
+    return ['ip' => false];
   }
-  return ['code' => $code, 'expiration_minutes' => $expires_in_minutes];
-}, $update_codes, array_keys($update_codes));
+  return ['ip' => $ip, 'expiration_days' => $expiration_in_days];
+}, $allowed_ips, array_keys($allowed_ips));
 
-Template::displayTemplate('index.html', ['register' => $register, 'codes' => $codes]);
+Template::displayTemplate('main.html', ['register' => $register, 'accesses' => $codes]);

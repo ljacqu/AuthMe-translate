@@ -23,6 +23,9 @@ button:active, input[type=submit]:active {
     border-style: inset;
     background-color: #ff9;
 }
+.smallpadding {
+    padding: 0.1em;
+}
 select {
     font-size: 12pt;
     padding: 0.2em 2em;
