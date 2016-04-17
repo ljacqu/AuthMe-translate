@@ -93,3 +93,6 @@ div.error {
 .missing {
     background-color: #fcc;
 }
+td.changed {
+    background-color: #cfc;
+}
