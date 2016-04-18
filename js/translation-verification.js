@@ -18,7 +18,7 @@ $(document).ready(function() {
 
     /**
      * Checks an input field and colors it accordingly. For missing tags, adds a message with
-     * the missing tags to the span.error following {@code elem}.
+     * the missing tags to the next element with class="validation-error" following {@code elem}.
      *
      * @param elem the input element to verify
      */
@@ -26,7 +26,7 @@ $(document).ready(function() {
         elem = elem instanceof jQuery ? elem : $(elem);
         elem.removeClass('empty');
         elem.removeClass('missing');
-        var errorMessage = elem.next('span.error');
+        var errorMessage = elem.next('.validation-error');
         errorMessage.text('');
 
         var elemText = elem.val().trim();
@@ -42,7 +42,7 @@ $(document).ready(function() {
             }
             if (missingTags.length > 0) {
                 elem.addClass('missing');
-                elem.next('span.error').html('<br />Missing tags ' + missingTags.join(', '));
+                elem.next('.validation-error').html('<br />Missing tags ' + missingTags.join(', '));
             }
         }
     };
@@ -78,8 +78,6 @@ $(document).ready(function() {
                 $(this).parents('tr').hide();
             }
         });
-        $('#hideValidFieldsLink').hide();
-        $('#showAllFieldsLink').show();
     };
 
     /**
@@ -87,8 +85,6 @@ $(document).ready(function() {
      */
     var showAllFields = function () {
         $('table.edit tr').show();
-        $('#showAllFieldsLink').hide();
-        $('#hideValidFieldsLink').show();
     };
 
     // Edit page: Listeners & initial validation
@@ -99,8 +95,15 @@ $(document).ready(function() {
                 checkField($(this));
             });
         });
-        $('#hideValidFieldsLink').click(hideValidFields);
-        $('#showAllFieldsLink').click(showAllFields);
+        var showErrorsCheckbox = $('#show_errors_chk');
+        showErrorsCheckbox.attr('checked', false);
+        showErrorsCheckbox.change(function () {
+            if ($(this).is(':checked')) {
+                hideValidFields();
+            } else {
+                showAllFields();
+            }
+        });
     }
 
     // Public page: validation on load

@@ -1,58 +1,105 @@
+html {
+    min-height: 100%;
+}
 body {
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     font-size: 12pt;
-    margin: 2em;
-    background-color: #efefff;
+    margin: 2em 4em;
+    background: #fffcf9;
+    background: linear-gradient(#fffcf9, #fff9fc);
 }
 h1 {
+    font-family: 'Trebuchet MS', Arial, sans-serif;
     font-weight: normal;
-    font-size: 20pt;
+    font-size: 2em;
+    margin: 0 0 1em 0;
 }
-button, input[type=submit] {
-    border: 2px outset #343;
-    font-size: 12pt;
-    padding: 0.2em 2em;
-    margin: 1em;
-    background-color: #fffff9;
+h2 {
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    margin: 1.2em 0 1em 0;
 }
-button:hover, input[type=submit]:hover {
-    cursor: pointer;
-    background-color: #ff9;
+ul li {
+    list-style-type: square;
 }
-button:active, input[type=submit]:active {
-    border-style: inset;
-    background-color: #ff9;
+li + li {
+    margin-top: 0.3em;
 }
-.smallpadding {
-    padding: 0.1em;
-}
-.nav {
-    font-size: 0.9em;
-    padding: 0 1em;
-}
-select {
-    font-size: 12pt;
-    padding: 0.2em 2em;
-}
-a {
-    color: #33c;
+
+/* Links */
+a, a:visited {
+    color: #03f;
     text-decoration: underline;
 }
 a:hover {
     cursor: pointer;
-    color: #007;
+    color: #c30;
 }
+a:active {
+    color: #c30;
+}
+
+/* Submit button */
+button, input[type=submit] {
+    border: 2px outset #999;
+    border-radius: 4px;
+    font-size: 12pt;
+    padding: 0.2em 2em;
+    margin: 1em;
+    background-color: #eef;
+    color: #000;
+}
+input[type=submit] + input[type=submit],
+input[type=submit] + button,
+button + input[type=submit],
+button + button  {
+    margin-left: 0;
+}
+button:hover, input[type=submit]:hover {
+    cursor: pointer;
+    background-color: #ff6;
+    transition: background 0.2s ease;
+}
+button:active, input[type=submit]:active {
+    border-style: inset;
+    background-color: #ff6;
+}
+
+/* Other form controls */
+input[type=text] {
+    border: 1px solid #444;
+    border-radius: 2px;
+    font-size: 12pt;
+    padding: 0.1em;
+    margin-left: 0.5em;
+}
+select {
+    font-size: 12pt;
+    padding: 0.1em 1em;
+}
+
+.smallpadding {
+    padding: 0.1em;
+}
+
+/* Navigation */
+.nav {
+    font-size: 0.9em;
+    padding: 0;
+    font-style: italic;
+}
+
+/* Boxes */
 div.success {
     border: 1px solid #6c6;
-    padding: 1em;
+    padding: 2em 3em;
+    margin: -1em -3em 1em -3em;
     background-color: #efe;
-    display: table-cell;
 }
 div.error {
     border: 1px solid #c66;
-    padding: 1em;
+    padding: 2em 3em;
+    margin: -1em -3em 1em -3em;
     background-color: #fee;
-    display: table-cell;
 }
 
 /* Table in edit page */
@@ -60,19 +107,41 @@ div.error {
     width: 800px;
     border: 1px solid #666;
     font-size: 12pt;
+    /* Bottom margin is done after div.validation-error */
+    margin: 1em 0.2em 0 0.2em;
 }
 .edit td {
     padding: 0.1em 1em;
     border: 1px solid #333;
     background-color: #fff;
 }
-.edit tr.key td {
-    padding: 0.3em 0 0.2em 8em;
+.edit th {
     font-weight: bold;
-    background-color: #ccf;
+    text-align: center;
+    border: 1px solid #000;
+    padding: 0.4em 0 0.2em 1em;
+    background-color: #fed;
+}
+.edit tr.key td {
+    padding: 0.8em 0 0.4em 0;
+    text-align: center;
+    font-weight: bold;
+    background-color: #ffe;
+    border: 0;
+}
+.edit tr td:first-child, .edit tr th:first-child {
+    border-left: 1px solid #000;
+}
+.edit tr td:last-child, .edit tr th:last-child {
+    border-right: 1px solid #000;
 }
 .edit {
     border-collapse: collapse;
+}
+div.validation-error {
+    /* Keep in sync with top margin of .edit input[text] so the input is vertically centered */
+    margin-bottom: 1em;
+    padding-top: 0;
 }
 
 /* Table for public, read-only page */
@@ -87,15 +156,24 @@ div.error {
     background-color: #fff;
 }
 .public tr:nth-child(odd) {
-    background-color: #ddf;
+    background-color: #f9f6ff;
+}
+.public th {
+    background-color: #fed;
 }
 
 /* CSS marker classes */
 .empty {
     background-color: #ffc;
 }
+input.empty {
+    border: 1px solid #c50 !important;
+}
 .missing {
     background-color: #fcc;
+}
+input.missing {
+    border: 1px solid #900 !important;
 }
 td.changed {
     background-color: #cfc;

@@ -14,25 +14,29 @@
   This is your personal, private copy of the translation. You can edit it anytime with the following link:
   <a href="{root}?{secret_code}">{root}?{secret_code}</a>. Bookmark the link to continue editing later on.
 </p><p>
-  You can preview and share your translation via: <a href="{root}?p={public_code}">{root}?p={public_code}</a>.
+  You can preview and share your translation with <a href="{root}?p={public_code}">{root}?p={public_code}</a>.
   This link shows your translation but does not allow editing.
 </p><p>
-  <b>Once you are satisfied with your changes,</b> open an issue on the AuthMe issue tracker with the public link:
+  <b>Once your changes are ready,</b> let us know by creating an issue on the AuthMe repository with the public link:
   <a href="https://github.com/Xephi/AuthMeReloaded/issues/new?title=Translation%20for%20{language_code}&body=I%27ve%20done%20changes%20to%20language%20%60{language_code}%60%20at%20{root_url_encoded}%3Fp%3D{public_code}%20I%20would%20like%20you%20to%20include">create issue</a>.
 </p>
-<p>
-  <a id="hideValidFieldsLink">Show only fields with errors</a>
-  <a id="showAllFieldsLink" style="display: none">Show all fields</a>
-</p>
+<div style="margin: 2.5em 0; border-bottom: 1px solid #cc9"><!-- Breather --></div>
 
+<p><span title="Shows only the messages whose translation is empty or missing tags">
+  <input type="checkbox" id="show_errors_chk" />
+  <label for="show_errors_chk">Show only fields with errors</label>
+</span></p>
 <form method="post">
   <table class="edit">
     <tr>
-      <th style="width: 200px">Default (en)</th>
-      <th>Translated</th>
+      <th style="width: 200px">Message</th>
+      <th>Translation</th>
     </tr>
     [#messages]
-      <tr class="key"><td colspan="2">{key}</td></tr>
+      <tr class="key">
+        <td>{key}</td>
+        <td></td>
+      </tr>
       <tr>
         <td class="language_template"
             data-key="{key}">
@@ -44,22 +48,21 @@
                  name="{key}"
                  data-tags="{tags}"
                  class="verifiable" />
-          <span class="error"></span>
+          <div class="validation-error"></div>
         </td>
       </tr>
     [/#messages]
-    <tr>
-      <td>
-        <input type="submit" value="Save" name="update_file" />
-      </td>
-      <td>
-        <span id="language_selector"><!-- Populated via javascript --></span>
-        <button type="button" id="toggle_color_btn">
+    <tr style="background-color: #fff">
+      <td colspan="2">
+        <input type="submit" value="Save" name="update_file" title="Saves your changes" />
+        <span><!-- makes input previous input not adjacent to following button for spacing --></span>
+        <button type="button" id="toggle_color_btn" title="Shows a preview of the Minecraft color codes">
           Toggle colors
         </button>
-        <button type="button" id="show_changes_btn" data-lang="{language_code}">
+        <button type="button" id="show_changes_btn" data-lang="{language_code}" title="Changed messages will be marked green">
           Mark changes
         </button>
+        <span id="language_selector" title="Defines which language is shown on the left"><!-- Populated via javascript --></span>
       </td>
     </tr>
   </table>

@@ -3,8 +3,8 @@
 </p>
 <h1>AuthMe Translation</h1>
 <p>
-  This page allows you to edit and export translations of
-  <a href="https://github.com/AuthMe-Team/AuthMeReloaded">AuthMe</a> messages.
+  This is a web interface for viewing and editing the message translations of
+  <a href="https://github.com/AuthMe-Team/AuthMeReloaded">AuthMe</a>.
 </p>
 
 <p><label for="create">Please select the language you want to view or change:</label></p>
@@ -22,18 +22,12 @@
 <form method="post">
   <p id="new_lang">
     New language: <a id="new_lang_link">click here</a>
-    <input type="text" name="create" style="display: none" />
+    <input type="text" name="create" style="display: none; width: 75px" maxlength="4" />
     <input type="submit" value="Create" style="display: none" />
     <span id="new_lang_error" style="display: none">Please use the
       <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a> code of a language</span>
   </p>
 </form>
-
-
-This will create a personal copy of the translation file that you can edit. Once you're satisfied
-with the result, you can create an issue on the
-<a href="https://github.com/Xephi/AuthMeReloaded/issues">AuthMe issue tracker</a> and we will merge the changes
-into the codebase.
 
 [translations]
   <h2>Your Translations</h2>
@@ -43,3 +37,14 @@ into the codebase.
   [/#translations]
   </ul>
 [/translations]
+
+<h2>Submitting Translations</h2>
+You can submit translation changes in three different ways:
+<ol>
+  <li>Using this web interface, select the language and hit "Edit translation." This will create a personal copy
+      of the translation you can edit and then share (instructions on the edit page).</li>
+  <li>Submit a pull request with the changes to your messages_xx.yml file to the
+      <a href="https://github.com/AuthMe-Team/AuthMeReloaded">AuthMe dev repository</a>.</li>
+  <li>Upload your messages_xx.yml file (e.g. to <a href="http://hastebin.com">hastebin</a>) and open a new issue on
+      the <a href="https://github.com/Xephi/AuthMeReloaded/issues">AuthMe issue tracker</a>.</li>
+</ol>

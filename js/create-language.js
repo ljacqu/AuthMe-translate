@@ -32,7 +32,7 @@ $(document).ready(function () {
         if (code.match(/^[a-z]{2,4}$/)) {
             var doesCodeExist = $('#create').find('option[value="' + code + '"]').length > 0;
             if (doesCodeExist) {
-                addError(newLangError, 'Language code already exists!');
+                addError(newLangError, 'Language code already exists! You can select it above.');
             } else {
                 return true;
             }

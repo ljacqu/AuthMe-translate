@@ -72,12 +72,17 @@ $(document).ready(function () {
     var showChangesAndAddComparison = function (lang) {
         loadMessages(lang, function (data) {
             unmarkChangesAndHideComparison();
-            $.each($('table.public tr').find('td:first'), function () {
+            var tableRows = $('table.public tr');
+            tableRows.find('th:last').after($('<th>').text('Current').addClass('comparison'));
+
+            $.each(tableRows.find('td:first'), function () {
                 var key = $(this).data('key');
                 var message = data.hasOwnProperty(key) ? data[key] : '';
                 var nextCell = $(this).siblings('td');
-                var cellClass = (message !== nextCell.text()) ? ' changed' : '';
-                nextCell.after($('<td class="comparison colorable' + cellClass + '">').text(message));
+                if (message !== nextCell.text()) {
+                    $(this).addClass('changed');
+                }
+                nextCell.after($('<td class="comparison colorable">').text(message));
             });
         });
     };
