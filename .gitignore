@@ -2,7 +2,7 @@
 /.idea
 
 # Data files
-/admin/allowed_ips.php
+/admin/allowed_ips.dat.php
 /import/*.json
 /userdata/*.key
 /userdata/*.php

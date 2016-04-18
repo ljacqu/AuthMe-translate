@@ -1,0 +1,2 @@
+<?php
+$ip_register = [];
