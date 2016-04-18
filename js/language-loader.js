@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    'use strict';
+
     /**
      * Loads a language's messages from the server.
      *
@@ -75,7 +77,7 @@ $(document).ready(function () {
                 var message = data.hasOwnProperty(key) ? data[key] : '';
                 var nextCell = $(this).siblings('td');
                 var cellClass = (message !== nextCell.text()) ? ' changed' : '';
-                nextCell.after('<td class="comparison colorable' + cellClass + '">' + message + '</td>');
+                nextCell.after($('<td class="comparison colorable' + cellClass + '">').text(message));
             });
         });
     };

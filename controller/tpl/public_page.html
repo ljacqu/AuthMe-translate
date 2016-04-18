@@ -8,7 +8,7 @@
   <form method="post">
 [/is_default]
 
-<button type="button" onclick="toggleColorables()">
+<button type="button" id="toggle_color_btn">
   Toggle colors
 </button>
 
@@ -29,7 +29,7 @@
   [#messages]
     <tr>
       <td data-key="{key}">{key}</td>
-      <td data-tags="{tags}" class="colorable">{translatedMessage}</td>
+      <td data-tags="{tags}" class="colorable verifiable">{translatedMessage}</td>
     </tr>
   [/#messages]
 </table>

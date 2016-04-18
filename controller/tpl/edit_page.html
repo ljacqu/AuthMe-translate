@@ -21,8 +21,8 @@
   <a href="https://github.com/Xephi/AuthMeReloaded/issues/new?title=Translation%20for%20{language_code}&body=I%27ve%20done%20changes%20to%20language%20%60{language_code}%60%20at%20{root_url_encoded}%3Fp%3D{public_code}%20I%20would%20like%20you%20to%20include">create issue</a>.
 </p>
 <p>
-  <a onclick="hideValidFields()" id="hideValidFieldsLink">Show only fields with errors</a>
-  <a onclick="showAllFields()" id="showAllFieldsLink" style="display: none">Show all fields</a>
+  <a id="hideValidFieldsLink">Show only fields with errors</a>
+  <a id="showAllFieldsLink" style="display: none">Show all fields</a>
 </p>
 
 <form method="post">
@@ -43,7 +43,7 @@
                  value="{translatedMessage}"
                  name="{key}"
                  data-tags="{tags}"
-                 onkeyup="checkField(this)" />
+                 class="verifiable" />
           <span class="error"></span>
         </td>
       </tr>
@@ -54,7 +54,7 @@
       </td>
       <td>
         <span id="language_selector"><!-- Populated via javascript --></span>
-        <button type="button" onclick="toggleColorables()">
+        <button type="button" id="toggle_color_btn">
           Toggle colors
         </button>
         <button type="button" id="show_changes_btn" data-lang="{language_code}">

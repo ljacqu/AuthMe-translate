@@ -57,17 +57,9 @@ if (isset($_GET['p'])) {
     exit;
   }
 }
-?>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>AuthMe Translation</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
-</head>
-<body>
 
-<?php
+Template::displayTemplate('./controller/tpl/header.html', []);
+
 try {
   if ($action === 'public') {
     $ctrl = new PublicPageCtrl();
@@ -86,12 +78,5 @@ try {
     <b>Error: </b>' . $e->getMessage() . '
     <br /><a href="index.php">Main page</a></div>';
 }
-?>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
-  <script src="translation-verification.js" type="text/javascript"></script>
-  <script src="language-loader.js" type="text/javascript"></script>
-  <script src="color-preview.js" type="text/javascript"></script>
-  <script src="create_language.js" type="text/javascript"></script>
-</body>
-</html>
+Template::displayTemplate('./controller/tpl/footer.html', []);
