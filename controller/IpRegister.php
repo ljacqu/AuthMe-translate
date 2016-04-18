@@ -6,7 +6,7 @@ class IpRegister {
 
   function __construct() {
     // Contains $ip_register
-    require USER_DATA_DIRECTORY . 'ip_register.php';
+    require USER_DATA_DIRECTORY . 'ip_register.dat.php';
     $this->data = $ip_register;
   }
 
@@ -48,7 +48,7 @@ class IpRegister {
   }
 
   private function saveIpRegister() {
-    $fh = fopen(USER_DATA_DIRECTORY . 'ip_register.php', 'w');
+    $fh = fopen(USER_DATA_DIRECTORY . 'ip_register.dat.php', 'w');
     if ($fh) {
       fwrite($fh, '<?php $ip_register = ' . var_export($this->data, true) . ';');
       fclose($fh);

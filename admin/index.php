@@ -3,8 +3,7 @@ error_reporting(E_ALL);
 
 require '../controller/Template.php';
 // Contains $ip_register
-require '../userdata/ip_register.php';
-
+require '../userdata/ip_register.dat.php';
 
 $register = [];
 foreach ($ip_register as $ip => $entries) {
@@ -22,7 +21,7 @@ foreach ($ip_register as $ip => $entries) {
 }
 
 // Contains $allowed_ips
-require 'allowed_ips.php';
+require 'allowed_ips.dat.php';
 $current_time = time();
 $codes = array_map(function ($expiration, $ip) use ($current_time) {
   $expiration_in_days = round(($expiration - $current_time) / 3600, 1);

@@ -3,7 +3,7 @@ require 'constants.php';
 
 if (isset($_POST['file']) && isset($_POST['language'])) {
   // Check access
-  require './admin/allowed_ips.php'; // Contains $allowed_ips
+  require './admin/allowed_ips.dat.php'; // Contains $allowed_ips
   $user_ip = $_SERVER['REMOTE_ADDR'];
   if (!isset($allowed_ips[$user_ip]) || time() > $allowed_ips[$user_ip]) {
     $input_code = filter_input(INPUT_POST, 'language', FILTER_UNSAFE_RAW,

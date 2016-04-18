@@ -11,11 +11,11 @@ if (isset($_POST['add'])) {
   validate_ip_address($ip);
 
   // Contains $allowed_ips
-  require 'allowed_ips.php';
+  require 'allowed_ips.dat.php';
   $allowed_ips = remove_expired_ips($allowed_ips);
 
   // Add new ip
-  $allowed_ips[$ip] = time() + 3600 * 30; // valid for 30 days
+  $allowed_ips[$ip] = time() + 3600 * 24 * 30; // valid for 30 days
   save_data($allowed_ips);
   echo json_encode(['error' => '', 'success' => true]);
 }
@@ -25,7 +25,7 @@ else if (isset($_POST['remove'])) {
   validate_ip_address($ip);
 
   // Contains $allowed_ips
-  require 'allowed_ips.php';
+  require 'allowed_ips.dat.php';
   $allowed_ips = remove_expired_ips($allowed_ips);
 
   // Remove IP
@@ -51,7 +51,7 @@ function validate_ip_address($ip) {
 }
 
 function save_data($data) {
-  $fh = fopen('allowed_ips.php', 'w');
+  $fh = fopen('allowed_ips.dat.php', 'w');
   fwrite($fh, '<?php $allowed_ips = ' . var_export($data, true) . ';');
   fclose($fh);
 }
