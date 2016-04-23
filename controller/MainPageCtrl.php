@@ -23,13 +23,13 @@ class MainPageCtrl {
     Template::displayTemplate('./controller/tpl/main_page.html', $tags);
   }
 
-  static function getAvailableLanguages() {
-    $dir = IMPORT_DIRECTORY;
+  static function getAvailableLanguages($folderPrefix = null) {
+    $dir = ($folderPrefix ?: '') . IMPORT_DIRECTORY;
     $codes = [];
     if (is_dir($dir)) {
       if ($dh = opendir($dir)) {
         while (($file = readdir($dh)) !== false) {
-          if (self::isMessagesFile($file)) {
+          if (self::isMessagesFile($dir, $file)) {
             $codes[] = self::extractLanguageCode($file);
           }
         }
@@ -51,8 +51,8 @@ class MainPageCtrl {
     }, $translations, array_keys($translations));
   }
 
-  private static function isMessagesFile($file) {
-    return is_file(IMPORT_DIRECTORY . $file) && preg_match('~^messages_[a-z]{1,4}\\.json~', $file);
+  private static function isMessagesFile($dir, $file) {
+    return is_file($dir . $file) && preg_match('~^messages_[a-z]{1,4}\\.json~', $file);
   }
 
   private static function extractLanguageCode($file) {

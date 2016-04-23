@@ -4,6 +4,8 @@ error_reporting(E_ALL);
 require '../controller/Template.php';
 // Contains $ip_register
 require '../userdata/ip_register.dat.php';
+require '../controller/MainPageCtrl.php';
+require '../constants.php';
 
 $register = [];
 foreach ($ip_register as $ip => $entries) {
@@ -24,11 +26,20 @@ foreach ($ip_register as $ip => $entries) {
 require 'allowed_ips.dat.php';
 $current_time = time();
 $codes = array_map(function ($expiration, $ip) use ($current_time) {
-  $expiration_in_days = round(($expiration - $current_time) / 3600, 1);
+  $expiration_in_days = round(($expiration - $current_time) / (3600 * 24), 1);
   if ($expiration_in_days <= 0.0) {
     return ['ip' => false];
   }
   return ['ip' => $ip, 'expiration_days' => $expiration_in_days];
 }, $allowed_ips, array_keys($allowed_ips));
 
-Template::displayTemplate('main.html', ['register' => $register, 'accesses' => $codes]);
+// Get available languages in /import
+$languages = array_map(function ($code) {
+  return ['languages_code' => $code];
+}, MainPageCtrl::getAvailableLanguages('../'));
+
+Template::displayTemplate('main.html', [
+  'register' => $register,
+  'accesses' => $codes,
+  'languages' => $languages
+]);
