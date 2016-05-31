@@ -16,7 +16,7 @@ class PublicPageCtrl {
 
   function showLanguage($langCode) {
     $this->validateLanguageCode($langCode);
-    $data = (array) json_decode(file_get_contents(IMPORT_DIRECTORY . 'messages_' . $langCode . '.json'));
+    $data = json_decode(file_get_contents(IMPORT_DIRECTORY . 'messages_' . $langCode . '.json'), true);
     foreach ($data['messages'] as $key => $obj) {
       $data['messages'][$key] = (array) $obj;
     }

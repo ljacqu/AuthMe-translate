@@ -32,7 +32,7 @@ class CreateCopyCtrl {
   }
 
   private function writeData($templateLanguage, $newLangCode, $publicKey, $destinationFile) {
-    $data = (array) json_decode(file_get_contents(IMPORT_DIRECTORY . 'messages_' . $templateLanguage . '.json'));
+    $data = json_decode(file_get_contents(IMPORT_DIRECTORY . 'messages_' . $templateLanguage . '.json'), true);
     foreach ($data['messages'] as $key => $obj) {
       $data['messages'][$key] = (array) $obj;
       if ($templateLanguage !== $newLangCode) {
