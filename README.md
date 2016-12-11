@@ -1,9 +1,9 @@
 AuthMe Translation Interface
 ----------------------------
-Source code of the [AuthMe translation web interface](https://jalu.ch/ext/authme),
+Source code for a translation interface
 allowing users to create and edit translations for
 [AuthMe](https://github.com/AuthMe-Team/AuthMeReloaded), a Minecraft
-authentication plugin.
+authentication plugin. No longer in use.
 
 Pull request are much appreciated, especially for improving the
 design of the web page (_hint hint_).
